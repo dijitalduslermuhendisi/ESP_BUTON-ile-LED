@@ -1,0 +1,25 @@
+const int butonPin = D3;
+const int ledPin = D2;
+
+bool ledDurum = false;
+bool oncekiButonDurum = HIGH;
+
+void setup() {
+  pinMode(ledPin, OUTPUT);
+  pinMode(butonPin, INPUT_PULLUP);
+  digitalWrite(ledPin, LOW);
+}
+
+void loop() {
+  bool simdikiButonDurum = digitalRead(butonPin);
+  
+  if (simdikiButonDurum == LOW && oncekiButonDurum == HIGH) {
+    delay(50);
+    if (digitalRead(butonPin) == LOW) {
+      ledDurum = !ledDurum;
+      digitalWrite(ledPin, ledDurum ? HIGH : LOW);
+    }
+  }
+
+  oncekiButonDurum = simdikiButonDurum;
+}
